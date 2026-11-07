@@ -1,0 +1,23 @@
+services:
+  floci:
+    image: floci/floci@sha256:5ee85db604c4aa74ac76e07ea5cc83086f37bb472bf3dbb97e34019e48efae9c
+    ports:
+      - "127.0.0.1:4566:4566"
+    environment:
+      FLOCI_HOSTNAME: floci
+      FLOCI_DEFAULT_REGION: us-east-1
+      FLOCI_STORAGE_MODE: persistent
+      FLOCI_STORAGE_PERSISTENT_PATH: /app/data
+    volumes:
+      - floci-data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  terraform:
+    image: hashicorp/terraform:1.11.4
+    profiles: [tools]
+    working_dir: /workspace/infra
+    volumes:
+      - .:/workspace
+
+volumes:
+  floci-data:

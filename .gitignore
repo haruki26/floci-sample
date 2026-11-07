@@ -1,0 +1,7 @@
+.terraform/
+infra/terraform.tfstate
+infra/terraform.tfstate.backup
+infra/function.zip
+node_modules/
+dist/
+.playwright-mcp/
